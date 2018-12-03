@@ -1035,10 +1035,34 @@ const inputArray = String.raw`+13
 +12
 +16
 -77039`;
-const splitArray = inputArray.split("\n");
 
+const splitArray = inputArray.split("\n");
 let counter = 0;
-for (let index = 0; index < splitArray.length; index++) {
-  counter = counter + eval(splitArray[index]);
-}
-console.log(counter);
+const newArray = [];
+
+// for (let index = 0; index < splitArray.length; index++) {
+//   counter = counter + eval(splitArray[index]);
+// }
+
+let findDuplicates = array => {
+  let results = [];
+  for (let i = 0; i < array.length; i++) {
+    if (results[array[i]] === undefined) {
+      results[array[i]] = 1;
+    } else {
+      return true;
+    }
+  }
+  return false;
+};
+
+do {
+  splitArray.forEach(element => {
+    counter = counter + eval(element);
+    newArray.push(counter);
+  });
+} while (findDuplicates(newArray) === false);
+console.log(findDuplicates(newArray));
+
+const f = a => a.find(c => !(a[-c] ^= 1));
+console.log(f(newArray));
